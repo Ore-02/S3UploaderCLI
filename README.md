@@ -1,7 +1,7 @@
 # S3UploaderCLI
 
 ## Description
-`S3UploaderCLI` is a Bash script designed to upload multiple files from your home directory to a specified AWS S3 bucket. It checks if the files exist, uploads them to the specified bucket, and generates a temporary pre-signed URL for each uploaded file.
+`S3UploaderCLI` is a Bash script designed to upload multiple files from your home directory to a specified AWS S3 bucket. It uploads them to the specified bucket, and generates a temporary pre-signed URL for each uploaded file.
 
 ## Prerequisites
 Before running this script, ensure the following prerequisites are met:
