@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+cloud_Uploader () {
+    read -p "Specify the bucket: " bucket
+    cloud_directory=s3://$bucket/ #aws s3 cloud directory
+    local file_name=() #array containing arguments 
+    file_name+=($@) # appends any number of arguments to the array
+    for file in ${file_name[@]}; do
+        src_directory=$(find ~/ -type f -name "$file") #finds the directory of the file in the home directory
+        if [ ! -f $src_directory ]; then  #check if the file exists
+            echo "This file does not exist"
+        else
+            aws s3 cp "$src_directory" "$cloud_directory" #performs the action of coping the file to the aws bucket
+            if [ $? -eq 0 ]; then #checks the return status of the command 
+                echo "Successfully uploaded $file file"
+                file_link=$(aws s3 presign "$cloud_directory$file" --expires-in 10) # Generates a link for the uploaded file which is valid for 10 sec
+                echo "File link (valid for 10 seconds): $file_link"
+            else
+                echo "Failed to upload $file file"
+            fi
+        fi
+    done
+}
+
+cloud_Uploader $@
+
