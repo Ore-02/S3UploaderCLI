@@ -2,7 +2,7 @@
 
 
 cloud_Uploader () {
-    read -p "Specify the bucket: " bucket
+    read -p "Specify the bucket: " bucket #prompt the user for the S3 Bucket
     cloud_directory=s3://$bucket/ #aws s3 cloud directory
     local file_name=() #array containing arguments 
     file_name+=($@) # appends any number of arguments to the array
